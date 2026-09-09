@@ -8,7 +8,7 @@ export function About() {
 
   return (
     <section id="about" className="border-t border-border py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-8">
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.about.eyebrow}</p>

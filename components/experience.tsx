@@ -8,7 +8,7 @@ export function Education() {
 
   return (
     <section id="education" className="border-t border-border py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.education.eyebrow}</p>
@@ -36,7 +36,7 @@ export function Experience() {
 
   return (
     <section id="experience" className="border-t border-border py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-8">
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.experience.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">

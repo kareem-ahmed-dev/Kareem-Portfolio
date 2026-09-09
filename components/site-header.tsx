@@ -35,7 +35,7 @@ export function SiteHeader() {
         scrolled ? "border-b border-border bg-background/80 backdrop-blur-md" : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-5 sm:px-7 md:gap-8 md:px-8 lg:px-10">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-5 px-5 sm:px-7 md:gap-8 md:px-8 lg:px-8">
         <a href="#home" className="font-mono text-sm font-semibold tracking-tight text-foreground">
           {t.nav.brand}
         </a>

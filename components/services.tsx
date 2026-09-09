@@ -10,7 +10,7 @@ export function Services() {
 
   return (
     <section id="services" className="border-t border-border bg-secondary/40 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-8">
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.services.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">

@@ -12,7 +12,7 @@ export function Hero() {
 
   return (
     <section id="home" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 md:pt-36 md:pb-24 lg:pt-40">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-8">
         <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(260px,0.72fr)] md:gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-16">
           <div className="max-w-3xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
@@ -51,7 +51,7 @@ export function Hero() {
 
           </div>
 
-          <div className="mx-auto w-full max-w-[300px] md:max-w-none">
+          <div className="mx-auto w-full max-w-[220px] sm:max-w-[250px] md:max-w-none">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border bg-card shadow-2xl shadow-primary/10">
               <Image
                 src="/profile-photo.jpeg"
@@ -67,15 +67,15 @@ export function Hero() {
       </div>
 
       <div className="relative mt-16 md:mt-24">
-        <div className="flex overflow-hidden border-y border-border py-4 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex shrink-0 animate-marquee items-center gap-10 pe-10">
+        <div className="group flex overflow-hidden border-y border-border py-4 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" aria-label="Skills">
+          <div className="flex shrink-0 animate-marquee items-center gap-10 group-hover:[animation-play-state:paused] pe-10">
             {MARQUEE.concat(MARQUEE).map((item, i) => (
               <span key={i} className="font-mono text-sm text-muted-foreground">
                 {item}
               </span>
             ))}
           </div>
-          <div className="flex shrink-0 animate-marquee items-center gap-10 pe-10" aria-hidden="true">
+          <div className="flex shrink-0 animate-marquee items-center gap-10 group-hover:[animation-play-state:paused] pe-10" aria-hidden="true">
             {MARQUEE.concat(MARQUEE).map((item, i) => (
               <span key={i} className="font-mono text-sm text-muted-foreground">
                 {item}

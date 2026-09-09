@@ -10,7 +10,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border py-12">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 lg:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-sm">
             <p className="font-mono text-sm font-semibold text-foreground">{t.footer.name}</p>
