@@ -172,8 +172,10 @@ const en = {
       message: "Message",
       messagePlaceholder: "Tell me about your project…",
       submit: "Send Message",
+      sending: "Sending…",
       successTitle: "Message sent!",
       successBody: "Thanks for reaching out — I'll get back to you soon.",
+      errorBody: "Something went wrong. Please try again or contact me directly.",
     },
   },
   footer: {
@@ -342,8 +344,10 @@ const ar: Dictionary = {
       message: "الرسالة",
       messagePlaceholder: "أخبرني عن مشروعك…",
       submit: "إرسال الرسالة",
-      successTitle: "تم إرسال ��لرسالة!",
+      sending: "جارٍ الإرسال…",
+      successTitle: "تم إرسال الرسالة!",
       successBody: "شكرًا لتواصلك — سأعود إليك في أقرب وقت.",
+      errorBody: "حدث خطأ ما. حاول مرة أخرى أو تواصل معي مباشرة.",
     },
   },
   footer: {

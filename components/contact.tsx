@@ -1,18 +1,23 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Mail, MessageCircle, Check, Code2, Briefcase } from "lucide-react"
+import { Mail, MessageCircle, Check, Code2, Briefcase, AlertCircle, Loader2 } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { CONTACT } from "@/lib/dictionaries"
 
 export function Contact() {
   const { t } = useLanguage()
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [form, setForm] = useState({ name: "", email: "", message: "" })
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    
+    if (isSubmitting) return
+    setIsSubmitting(true)
+    setError(false)
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -21,7 +26,7 @@ export function Contact() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "954bc42d-2045-4ef7-8ca2-8b535891b598",
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
           name: form.name,
           email: form.email,
           message: form.message,
@@ -30,9 +35,14 @@ export function Contact() {
       const result = await response.json()
       if (result.success) {
         setSent(true)
+        setForm({ name: "", email: "", message: "" })
+      } else {
+        setError(true)
       }
-    } catch (error) {
-      console.error(error)
+    } catch {
+      setError(true)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -163,11 +173,27 @@ export function Contact() {
                     className="w-full resize-none rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
                   />
                 </div>
+
+                {error && (
+                  <div className="flex items-center gap-2 rounded-lg border border-destructive/30 bg-destructive/10 px-3.5 py-2.5 text-sm text-destructive">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{t.contact.form.errorBody}</span>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                  disabled={isSubmitting}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {t.contact.form.submit}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {t.contact.form.sending}
+                    </>
+                  ) : (
+                    t.contact.form.submit
+                  )}
                 </button>
               </div>
             </form>
