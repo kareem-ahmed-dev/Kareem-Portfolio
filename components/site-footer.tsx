@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, MessageCircle, Github, Linkedin } from "lucide-react"
+import { Mail, MessageCircle, Code2, Briefcase } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { CONTACT } from "@/lib/dictionaries"
 
@@ -41,7 +41,7 @@ export function SiteFooter() {
               aria-label="GitHub"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
             >
-              <Github className="h-4 w-4" />
+              <Code2 className="h-4 w-4" />
             </a>
             <a
               href={CONTACT.linkedin}
@@ -50,7 +50,7 @@ export function SiteFooter() {
               aria-label="LinkedIn"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
             >
-              <Linkedin className="h-4 w-4" />
+              <Briefcase className="h-4 w-4" />
             </a>
           </div>
         </div>

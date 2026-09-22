@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Mail, MessageCircle, Check, Github, Linkedin } from "lucide-react"
+import { Mail, MessageCircle, Check, Code2, Briefcase } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { CONTACT } from "@/lib/dictionaries"
 
@@ -85,7 +85,7 @@ export function Contact() {
                 className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                  <Github className="h-5 w-5" />
+                  <Code2 className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs text-muted-foreground">{t.contact.githubLabel}</span>
@@ -99,7 +99,7 @@ export function Contact() {
                 className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                  <Linkedin className="h-5 w-5" />
+                  <Briefcase className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs text-muted-foreground">{t.contact.linkedinLabel}</span>
