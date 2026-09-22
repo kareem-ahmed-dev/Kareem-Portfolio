@@ -1,0 +1,217 @@
+[
+  {
+    "id": "TC001",
+    "title": "Submit the contact form successfully",
+    "description": "A visitor can fill out the contact form on the landing page and see a success confirmation after submitting it.",
+    "category": "Contact Form Submission",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name input field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email input field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message input field with a valid message"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Switch the site language to Arabic",
+    "description": "A visitor can change the landing page language and see the content update to Arabic.",
+    "category": "Language Switch",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the language toggle button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page content is displayed in Arabic"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page layout updates for right-to-left text direction"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Switch the site theme to dark mode",
+    "description": "A visitor can change the landing page appearance to dark mode and see the visual theme update across the page.",
+    "category": "Theme Switch",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dark theme is applied across the page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Keep the landing page usable after changing language and theme",
+    "description": "A visitor can switch language and theme on the landing page and still use the contact form afterward.",
+    "category": "Contact Form Submission",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the language toggle button"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name input field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email input field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message input field with a valid message"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Switch the site language back to English",
+    "description": "A visitor can toggle from Arabic back to English and see the original landing page language restored.",
+    "category": "Language Switch",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the language toggle button"
+      },
+      {
+        "type": "action",
+        "description": "Click the language toggle button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page content is displayed in English"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page layout updates for left-to-right text direction"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Switch the site theme back to light mode",
+    "description": "A visitor can toggle from dark mode back to light mode and see the visual theme return to the default appearance.",
+    "category": "Theme Switch",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the light theme is applied across the page"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC007",
+    "title": "Keep the landing page language switchable after submitting the form",
+    "description": "A visitor can submit the contact form and then switch the landing page language without breaking the page controls.",
+    "category": "Language Switch",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name input field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email input field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the message input field with a valid message"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "action",
+        "description": "Click the language toggle button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page content is displayed in the alternate language"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the page remains usable after submission"
+      }
+    ],
+    "priority": "Medium"
+  }
+]

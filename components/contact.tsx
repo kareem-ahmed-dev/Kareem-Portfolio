@@ -19,21 +19,19 @@ export function Contact() {
     setError(false)
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
           name: form.name,
           email: form.email,
           message: form.message,
         }),
       })
       const result = await response.json()
-      if (result.success) {
+      if (response.ok && result.success) {
         setSent(true)
         setForm({ name: "", email: "", message: "" })
       } else {

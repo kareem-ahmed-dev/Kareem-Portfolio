@@ -17,3 +17,4 @@ node_modules
 .DS_Store
 testsprite_tests/tmp/
 testsprite_tests/tmp/config.json
+take-screenshots.*
