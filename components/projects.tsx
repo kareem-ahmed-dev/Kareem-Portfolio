@@ -7,18 +7,21 @@ import { useLanguage } from "@/components/language-provider"
 const PROJECT_META = [
   {
     image: "/projects/dashboard.png",
-    tags: ["React.js", "Material UI", "JavaScript"],
+    tags: ["React", "Material UI", "Nivo", "FullCalendar", "Vite"],
     github: "https://github.com/kareem-ahmed-dev/dashboard-react",
+    liveDemo: "https://dashboard-react-one-psi.vercel.app/",
   },
   {
-    image: "/projects/weather-app.jpg",
-    tags: ["React.js", "Axios", "JavaScript"],
-    github: "https://github.com/kareem-ahmed-dev/Weather-app",
+    image: "/projects/landing.png",
+    tags: ["React", "Vite", "JavaScript", "CSS"],
+    github: "https://github.com/kareem-ahmed-dev/Landing-page",
+    liveDemo: "https://stratum-ai-landing-page.vercel.app/",
   },
   {
-    image: "/projects/creative-agency.jpg",
-    tags: ["HTML5", "CSS3", "JavaScript"],
-    github: "https://github.com/kareem-ahmed-dev/My-Projects-js",
+    image: "/projects/morrow.png",
+    tags: ["React", "Tailwind CSS", "React Router", "Vite"],
+    github: "https://github.com/kareem-ahmed-dev/morrow-store",
+    liveDemo: "https://morrow-store-seven.vercel.app/",
   },
 ]
 
@@ -66,13 +69,13 @@ export function Projects() {
                   </ul>
                   <div className="mt-5 flex items-center gap-2">
                     <a
-                      href={meta.github}
+                      href={meta.liveDemo}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-90"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
-                      {t.projects.viewRepository}
+                      {t.projects.liveDemo}
                     </a>
                     <a
                       href={meta.github}

@@ -142,14 +142,14 @@ const en = {
           "A modern and responsive dashboard interface built with React.js and Material UI, with organized views for dashboard content.",
       },
       {
-        title: "Weather App",
+        title: "Landing Page",
         description:
-          "A React weather application where users enter a city name to view weather information including temperature, humidity, and pressure.",
+          "An attractive and modern landing page built to present products clearly with a responsive and clean design.",
       },
       {
-        title: "Creative Agency",
+        title: "Morrow Store",
         description:
-          "A responsive creative agency website with About, Skills, Gallery, Timeline, Features, and Testimonials sections plus section navigation.",
+          "A responsive e-commerce application with product listing, shopping cart functionality, and clean modern design.",
       },
     ],
   },
@@ -160,6 +160,8 @@ const en = {
       "Have a project in mind or an opportunity you'd like to discuss? Feel free to get in touch.",
     emailLabel: "Email",
     whatsappLabel: "WhatsApp",
+    githubLabel: "GitHub",
+    linkedinLabel: "LinkedIn",
     sendEmail: "Send Email",
     whatsappCta: "Contact Me on WhatsApp",
     form: {
@@ -309,16 +311,16 @@ const ar: Dictionary = {
     github: "GitHub",
     items: [
       {
-        title: "لوحة تحكم",
+        title: "Dashboard",
         description: "واجهة لوحة تحكم حديثة ومتجاوبة مبنية باستخدام React.js وMaterial UI لتنظيم محتوى لوحة التحكم.",
       },
       {
-        title: "تطبيق الطقس",
-        description: "تطبيق طقس باستخدام React يتيح للمستخدم إدخال اسم مدينة وعرض درجة الحرارة والرطوبة والضغط الجوي.",
+        title: "Landing Page",
+        description: "صفحة هبوط جذابة وحديثة مصممة لعرض المنتجات بوضوح بتصميم متجاوب ونظيف.",
       },
       {
-        title: "وكالة إبداعية",
-        description: "موقع متجاوب لوكالة إبداعية يحتوي على أقسام عن الوكالة والمهارات والمعرض والخط الزمني والمميزات وآراء العملاء مع قائمة تنقل بين الأقسام.",
+        title: "Morrow Store",
+        description: "تطبيق متجر إلكتروني متجاوب يحتوي على عرض للمنتجات وسلة تسوق بتصميم عصري ونظيف.",
       },
     ],
   },
@@ -328,6 +330,8 @@ const ar: Dictionary = {
     description: "هل لديك مشروع في ذهنك أو فرصة ترغب في مناقشتها؟ لا تتردد في التواصل معي.",
     emailLabel: "البريد الإلكتروني",
     whatsappLabel: "واتساب",
+    githubLabel: "GitHub",
+    linkedinLabel: "LinkedIn",
     sendEmail: "إرسال بريد إلكتروني",
     whatsappCta: "تواصل معي عبر واتساب",
     form: {
@@ -355,4 +359,8 @@ export const CONTACT = {
   email: "krkrkemo2005@gmail.com",
   whatsappDisplay: "+20 155 180 1262",
   whatsappHref: "https://wa.me/201551801262",
+  github: "https://github.com/kareem-ahmed-dev",
+  githubDisplay: "kareem-ahmed-dev",
+  linkedin: "https://www.linkedin.com/in/kareem-ahmed-frontend-developer",
+  linkedinDisplay: "Kareem Ahmed",
 }

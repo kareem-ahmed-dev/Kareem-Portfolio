@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { Mail, MessageCircle, Check } from "lucide-react"
+import { Mail, MessageCircle, Check, Github, Linkedin } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { CONTACT } from "@/lib/dictionaries"
 
@@ -10,12 +10,30 @@ export function Contact() {
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({ name: "", email: "", message: "" })
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name || "a visitor"}`)
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`
-    setSent(true)
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "954bc42d-2045-4ef7-8ca2-8b535891b598",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+      const result = await response.json()
+      if (result.success) {
+        setSent(true)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -58,6 +76,34 @@ export function Contact() {
                   <span className="block text-sm font-medium text-foreground" dir="ltr">
                     {CONTACT.whatsappDisplay}
                   </span>
+                </span>
+              </a>
+              <a
+                href={CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <Github className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs text-muted-foreground">{t.contact.githubLabel}</span>
+                  <span className="block truncate text-sm font-medium text-foreground">{CONTACT.githubDisplay}</span>
+                </span>
+              </a>
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <Linkedin className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs text-muted-foreground">{t.contact.linkedinLabel}</span>
+                  <span className="block truncate text-sm font-medium text-foreground">{CONTACT.linkedinDisplay}</span>
                 </span>
               </a>
             </div>
