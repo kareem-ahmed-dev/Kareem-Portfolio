@@ -19,6 +19,7 @@ export function Contact() {
     setError(false)
 
     try {
+      let isSuccess = false
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -32,13 +33,74 @@ export function Contact() {
       })
       const result = await response.json().catch(() => null)
       if (response.ok && result?.success) {
+        isSuccess = true
+      } else if (process.env.NEXT_PUBLIC_WEB3FORMS_KEY) {
+        // Fallback: direct browser submit if serverless function encountered WAF or network error
+        try {
+          const directRes = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+              name: form.name,
+              email: form.email,
+              message: form.message,
+              subject: `Portfolio Message from ${form.name}`,
+              from_name: form.name,
+            }),
+          })
+          const directResult = await directRes.json().catch(() => null)
+          if (directRes.ok && directResult?.success) {
+            isSuccess = true
+          }
+        } catch {
+          // direct fallback failed
+        }
+      }
+
+      if (isSuccess) {
         setSent(true)
         setForm({ name: "", email: "", message: "" })
       } else {
         setError(true)
       }
     } catch {
-      setError(true)
+      let fallbackSuccess = false
+      if (process.env.NEXT_PUBLIC_WEB3FORMS_KEY) {
+        try {
+          const directRes = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+              name: form.name,
+              email: form.email,
+              message: form.message,
+              subject: `Portfolio Message from ${form.name}`,
+              from_name: form.name,
+            }),
+          })
+          const directResult = await directRes.json().catch(() => null)
+          if (directRes.ok && directResult?.success) {
+            fallbackSuccess = true
+          }
+        } catch {
+          // ignore
+        }
+      }
+
+      if (fallbackSuccess) {
+        setSent(true)
+        setForm({ name: "", email: "", message: "" })
+      } else {
+        setError(true)
+      }
     } finally {
       setIsSubmitting(false)
     }

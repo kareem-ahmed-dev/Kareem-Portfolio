@@ -18,3 +18,5 @@ node_modules
 testsprite_tests/tmp/
 testsprite_tests/tmp/config.json
 take-screenshots.*
+*.tsbuildinfo
+portfolio-screenshots/
