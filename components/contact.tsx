@@ -30,8 +30,8 @@ export function Contact() {
           message: form.message,
         }),
       })
-      const result = await response.json()
-      if (response.ok && result.success) {
+      const result = await response.json().catch(() => null)
+      if (response.ok && result?.success) {
         setSent(true)
         setForm({ name: "", email: "", message: "" })
       } else {

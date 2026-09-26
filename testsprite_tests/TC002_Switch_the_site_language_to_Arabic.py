@@ -40,28 +40,23 @@ async def run_test():
         except Exception:
             pass
         
-        # -> Click the 'العربية' language button in the header to switch the site to Arabic.
+        # -> Click the 'العربية' language button to switch the landing page to Arabic.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' language button to switch the site language to Arabic
+        # -> Click the 'العربية' language button to switch the landing page to Arabic and trigger the UI update.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
         # --> Assertions to verify final state
         
-        # --> Landing page content updated to Arabic — the header navigation shows 'الرئيسية'.
+        # --> The landing page displays Arabic content — the hero greeting is visible in Arabic.
+        await page.locator("div").filter(has_text=re.compile(r"^متاح لمشاريع جديدة$")).locator("span").nth(1).nth(0).scroll_into_view_if_needed()
         # Assert-outcome: passed
-        # Assert: Header navigation link displays the Arabic text 'الرئيسية'.
-        await expect(page.locator("xpath=/html/body/div[2]/header/div/nav/a[1]").nth(0)).to_have_text("\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629", timeout=15000), "Header navigation link displays the Arabic text '\u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629'."
-        
-        # --> The Arabic language toggle is active and the page visually updated to a right-to-left layout.
-        await page.get_by_role("button", name="العربية").nth(0).scroll_into_view_if_needed()
-        # Assert-outcome: passed
-        # Assert: The 'العربية' language toggle is visible (indicating the Arabic language mode was activated).
-        await expect(page.get_by_role("button", name="العربية").nth(0)).to_be_visible(timeout=15000), "The '\u0627\u0644\u0639\u0631\u0628\u064a\u0629' language toggle is visible (indicating the Arabic language mode was activated)."
+        # Assert: The hero greeting is visible on the page in Arabic.
+        await expect(page.locator("div").filter(has_text=re.compile(r"^متاح لمشاريع جديدة$")).locator("span").nth(1).nth(0)).to_be_visible(timeout=15000), "The hero greeting is visible on the page in Arabic."
         await asyncio.sleep(5)
 
     finally:

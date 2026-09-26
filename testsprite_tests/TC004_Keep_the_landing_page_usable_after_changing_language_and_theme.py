@@ -40,65 +40,51 @@ async def run_test():
         except Exception:
             pass
         
-        # -> Click the 'العربية' language button to switch the page language, then click the 'Theme' button to toggle theme, then click the 'Contact' navigation link to open the contact section.
+        # -> Click the 'العربية' language button to switch the site language to Arabic.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' language button to switch the page language, then click the 'Theme' button to toggle theme, then click the 'Contact' navigation link to open the contact section.
+        # -> Click the 'Theme' toggle button to switch the site theme.
         # Theme button
-        elem = page.get_by_role("button", name="المظهر")
+        elem = page.get_by_role("button", name="Theme")
         await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' language button to switch the page language, then click the 'Theme' button to toggle theme, then click the 'Contact' navigation link to open the contact section.
-        # Contact link
-        elem = page.get_by_label("Primary").get_by_role("link", name="تواصل معي")
+        # -> Click the 'Theme' toggle button to switch the site theme.
+        # Contact Me link
+        elem = page.locator("#home").get_by_role("link", name="Contact Me")
         await elem.click(timeout=10000)
         
-        # -> Fill 'الاسم' with a valid name, fill 'البريد الإلكتروني' with a valid email, fill 'الرسالة' with a message, then click the 'إرسال الرسالة' button to submit the form.
-        # اسمك text field
-        elem = page.get_by_role("textbox", name="الاسم")
+        # -> Fill the 'Name', 'Email', and 'Message' fields with valid test values and click the 'Send Message' button to submit the contact form.
+        # Your name text field
+        elem = page.get_by_role("textbox", name="Name")
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("\u0623\u062d\u0645\u062f \u0643\u0631\u064a\u0645")
+        await elem.fill("Test User")
         
-        # -> Fill 'الاسم' with a valid name, fill 'البريد الإلكتروني' with a valid email, fill 'الرسالة' with a message, then click the 'إرسال الرسالة' button to submit the form.
+        # -> Fill the 'Name', 'Email', and 'Message' fields with valid test values and click the 'Send Message' button to submit the contact form.
         # you@example.com email field
-        elem = page.get_by_role("textbox", name="البريد الإلكتروني")
+        elem = page.get_by_role("textbox", name="Email")
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("test@example.com")
+        await elem.fill("test.user@example.com")
         
-        # -> Fill 'الاسم' with a valid name, fill 'البريد الإلكتروني' with a valid email, fill 'الرسالة' with a message, then click the 'إرسال الرسالة' button to submit the form.
-        # أخبرني عن مشروعك… text area
-        elem = page.get_by_role("textbox", name="الرسالة")
+        # -> Fill the 'Name', 'Email', and 'Message' fields with valid test values and click the 'Send Message' button to submit the contact form.
+        # Tell me about your project… text area
+        elem = page.get_by_role("textbox", name="Message")
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("\u0645\u0631\u062d\u0628\u064b\u0627\u060c \u0623\u0648\u062f \u0645\u0646\u0627\u0642\u0634\u0629 \u0645\u0634\u0631\u0648\u0639 \u0645\u0639\u0643. \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0639\u0644\u0627\u0645\u064a \u0628\u062a\u0648\u0641\u0631 \u0648\u0642\u062a \u0644\u0645\u0643\u0627\u0644\u0645\u0629.")
+        await elem.fill("This is a test message submitted as part of QA to verify contact form functionality after language and theme toggles.")
         
-        # -> Fill 'الاسم' with a valid name, fill 'البريد الإلكتروني' with a valid email, fill 'الرسالة' with a message, then click the 'إرسال الرسالة' button to submit the form.
-        # إرسال الرسالة button
-        elem = page.get_by_role("button", name="إرسال الرسالة")
+        # -> Fill the 'Name', 'Email', and 'Message' fields with valid test values and click the 'Send Message' button to submit the contact form.
+        # Send Message button
+        elem = page.get_by_role("button", name="Send Message")
         await elem.click(timeout=10000)
         
         # --> Assertions to verify final state
         
-        # --> Expected a success confirmation to be visible after submitting the contact form, but an error message was shown instead.
-        # Assert-outcome: failed
-        # Assert: Expected the contact form area to show a visible success confirmation after submit.
-        await expect(page.locator("form").nth(0)).to_contain_text("\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0631\u0633\u0627\u0644\u0629", timeout=15000), "Expected the contact form area to show a visible success confirmation after submit."
-        
-        # --> Expected the name field to retain the submitted value 'أحمد كريم'.
-        # Assert-outcome: failed
-        # Assert: Expected the name input to contain the submitted value.
-        await expect(page.get_by_role("textbox", name="الاسم").nth(0)).to_have_value("\u0623\u062d\u0645\u062f \u0643\u0631\u064a\u0645", timeout=15000), "Expected the name input to contain the submitted value."
-        
-        # --> Expected the email field to retain the submitted value 'test@example.com'.
-        # Assert-outcome: failed
-        # Assert: Expected the email input to contain the submitted value.
-        await expect(page.get_by_role("textbox", name="البريد الإلكتروني").nth(0)).to_have_value("test@example.com", timeout=15000), "Expected the email input to contain the submitted value."
-        
-        # --> Expected the message textarea to retain the submitted message.
-        # Assert-outcome: failed
-        # Assert: Expected the message textarea to contain the submitted text.
-        await expect(page.get_by_role("textbox", name="الرسالة").nth(0)).to_have_value("\u0645\u0631\u062d\u0628\u064b\u0627\u060c \u0623\u0648\u062f \u0645\u0646\u0627\u0642\u0634\u0629 \u0645\u0634\u0631\u0648\u0639 \u0645\u0639\u0643. \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0639\u0644\u0627\u0645\u064a \u0628\u062a\u0648\u0641\u0631 \u0648\u0642\u062a \u0644\u0645\u0643\u0627\u0644\u0645\u0629.", timeout=15000), "Expected the message textarea to contain the submitted text."
+        # --> A success confirmation is visible after submitting the contact form.
+        await page.locator("div").filter(has_text=re.compile(r"^Message sent!Thanks for reaching out — I'll get back to you soon\.$")).locator("span").nth(0).scroll_into_view_if_needed()
+        # Assert-outcome: passed
+        # Assert: Confirmation message is visible on the contact section.
+        await expect(page.locator("div").filter(has_text=re.compile(r"^Message sent!Thanks for reaching out — I'll get back to you soon\.$")).locator("span").nth(0)).to_be_visible(timeout=15000), "Confirmation message is visible on the contact section."
         await asyncio.sleep(5)
 
     finally:

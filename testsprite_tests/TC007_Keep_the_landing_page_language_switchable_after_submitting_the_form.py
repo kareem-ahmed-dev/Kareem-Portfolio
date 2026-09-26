@@ -40,7 +40,7 @@ async def run_test():
         except Exception:
             pass
         
-        # -> Click the 'Contact' link in the top navigation to open the contact section.
+        # -> Click the 'Contact' link in the navigation to open the contact section
         # Contact link
         elem = page.get_by_role("link", name="Contact", exact=True)
         await elem.click(timeout=10000)
@@ -55,55 +55,66 @@ async def run_test():
         # you@example.com email field
         elem = page.get_by_role("textbox", name="Email")
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("tester@example.com")
+        await elem.fill("test.user@example.com")
         
         # -> Fill the Name, Email, and Message fields and click the 'Send Message' button to submit the contact form.
         # Tell me about your project… text area
         elem = page.get_by_role("textbox", name="Message")
         await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill("This is a test message submitted by an automated QA test.")
+        await elem.fill("This is a test message submitted by an automated QA check to verify the contact form.")
         
         # -> Fill the Name, Email, and Message fields and click the 'Send Message' button to submit the contact form.
         # Send Message button
         elem = page.get_by_role("button", name="Send Message")
         await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' language toggle button to switch the page language to Arabic and then verify the UI updates and remains usable.
+        # -> Click the 'العربية' language button to switch the landing page to Arabic.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
-        # -> Click the 'EN' language toggle button to switch back to English and confirm the UI updates and controls remain usable after the submission error.
+        # -> Verify the Arabic success message 'تم إرسال الرسالة!' is visible on the page, then click the 'EN' language button to switch back to English.
         # EN button
         elem = page.get_by_role("button", name="EN")
         await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' (Arabic) language button to switch the page to Arabic and confirm the contact form remains editable and the UI updates to Arabic.
-        # Your name text field
-        elem = page.get_by_role("textbox", name="Name")
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill(" (qa-check)")
+        # -> Click the 'Contact' navigation link to confirm it's still clickable and the page remains interactive.
+        # Contact link
+        elem = page.get_by_role("link", name="Contact", exact=True)
+        await elem.click(timeout=10000)
         
-        # -> Click the 'العربية' (Arabic) language button to switch the page to Arabic and confirm the contact form remains editable and the UI updates to Arabic.
+        # -> Click the 'Contact' navigation link to confirm it's still clickable and the page remains interactive.
+        # Contact Me link
+        elem = page.get_by_role("banner").get_by_role("link", name="Contact Me")
+        await elem.click(timeout=10000)
+        
+        # -> Click the 'العربية' language button to switch the page to Arabic and verify the Arabic success message 'تم إرسال الرسالة!' appears, then confirm the 'Contact' link remains usable.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
-        # -> Edit the 'الاسم' (Name) field to confirm the contact form remains editable after submission and language switch.
-        # اسمك text field
-        elem = page.get_by_role("textbox", name="الاسم")
-        await elem.wait_for(state="visible", timeout=10000)
-        await elem.fill(" -editable")
-        
-        # -> Click the 'EN' language toggle button to switch the page back to English and verify the page updates and controls remain usable.
-        # EN button
-        elem = page.get_by_role("button", name="EN")
+        # -> Click the 'تواصل معي' link to confirm the contact navigation is still clickable and the page remains interactive.
+        # تواصل معي link
+        elem = page.get_by_label("Primary").get_by_role("link", name="تواصل معي")
         await elem.click(timeout=10000)
         
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
+        # -> Click the 'تواصل معي' link to confirm the contact navigation is still clickable and the page remains interactive.
+        # تواصل معي link
+        elem = page.locator("div").filter(has_text=re.compile(r"^ENالعربيةالمظهرتواصل معي$")).get_by_role("link")
+        await elem.click(timeout=10000)
+        
+        # --> Assertions to verify final state
+        
+        # --> The Arabic success confirmation 'تم إرسال الرسالة!' is visible after submission and language switching.
+        # Assert-outcome: passed
+        # Assert: Arabic success message 'تم إرسال الرسالة!' is visible in the contact area.
+        await expect(page.locator("#contact").nth(0)).to_contain_text("\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0631\u0633\u0627\u0644\u0629!", timeout=15000), "Arabic success message '\u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0631\u0633\u0627\u0644\u0629!' is visible in the contact area."
+        
+        # --> The contact navigation link ('تواصل معي') remains usable after submitting the form and switching languages.
+        await page.get_by_label("Primary").get_by_role("link", name="تواصل معي").nth(0).scroll_into_view_if_needed()
+        # Assert-outcome: passed
+        # Assert: The 'تواصل معي' navigation link is visible in the header.
+        await expect(page.get_by_label("Primary").get_by_role("link", name="تواصل معي").nth(0)).to_be_visible(timeout=15000), "The '\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u064a' navigation link is visible in the header."
         await asyncio.sleep(5)
 
     finally:

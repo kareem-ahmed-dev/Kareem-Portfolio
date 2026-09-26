@@ -40,23 +40,23 @@ async def run_test():
         except Exception:
             pass
         
-        # -> Click the 'Theme' button to toggle theme to dark, then click it again to return to the light theme.
+        # -> Click the 'Theme' button to switch the site to dark mode.
         # Theme button
         elem = page.get_by_role("button", name="Theme")
         await elem.click(timeout=10000)
         
-        # -> Click the 'Theme' button to toggle theme to dark, then click it again to return to the light theme.
+        # -> Click the 'Theme' button to switch the site back to the light theme (return to default appearance).
         # Theme button
         elem = page.get_by_role("button", name="Theme")
         await elem.click(timeout=10000)
         
         # --> Assertions to verify final state
         
-        # --> The site displays the light/default theme (light background with dark text) after toggling the theme button.
+        # --> The site returned to the light theme and the main heading is visible.
         await page.locator("div").filter(has_text=re.compile(r"^Available for new projects$")).locator("span").nth(1).nth(0).scroll_into_view_if_needed()
         # Assert-outcome: passed
-        # Assert: The hero heading element is visible on the page, indicating the page rendered in the light theme.
-        await expect(page.locator("div").filter(has_text=re.compile(r"^Available for new projects$")).locator("span").nth(1).nth(0)).to_be_visible(timeout=15000), "The hero heading element is visible on the page, indicating the page rendered in the light theme."
+        # Assert: Main heading element is visible on the page.
+        await expect(page.locator("div").filter(has_text=re.compile(r"^Available for new projects$")).locator("span").nth(1).nth(0)).to_be_visible(timeout=15000), "Main heading element is visible on the page."
         await asyncio.sleep(5)
 
     finally:

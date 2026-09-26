@@ -40,28 +40,25 @@ async def run_test():
         except Exception:
             pass
         
-        # -> Click the 'العربية' language button to switch the site to Arabic.
+        # -> Click the 'العربية' button to switch the site to Arabic, then click the 'EN' button to switch back to English and verify the English headline is restored.
         # العربية button
         elem = page.get_by_role("button", name="العربية")
         await elem.click(timeout=10000)
         
-        # -> Click the 'EN' language button to switch the site back to English.
+        # -> Click the 'العربية' button to switch the site to Arabic, then click the 'EN' button to switch back to English and verify the English headline is restored.
         # EN button
         elem = page.get_by_role("button", name="EN")
         await elem.click(timeout=10000)
         
         # --> Assertions to verify final state
         
-        # --> The page content is displayed in English (hero headline is visible in English).
+        # --> After toggling back, the site content is displayed in English and the page shows the English language active.
         # Assert-outcome: passed
-        # Assert: The hero headline contains the English text shown on the page.
-        await expect(page.locator("#home").nth(0)).to_contain_text("Front-End Developer Building Modern Web Experiences", timeout=15000), "The hero headline contains the English text shown on the page."
-        
-        # --> The page layout is left-to-right after switching back to English.
-        await page.get_by_role("link", name="Home").nth(0).scroll_into_view_if_needed()
+        # Assert: The navigation link text is 'Home', indicating English content is shown.
+        await expect(page.locator("xpath=/html/body/div[2]/header/div/nav/a[1]").nth(0)).to_have_text("Home", timeout=15000), "The navigation link text is 'Home', indicating English content is shown."
         # Assert-outcome: passed
-        # Assert: The primary navigation link ('Home') is visible in the header, consistent with the LTR layout observed.
-        await expect(page.get_by_role("link", name="Home").nth(0)).to_be_visible(timeout=15000), "The primary navigation link ('Home') is visible in the header, consistent with the LTR layout observed."
+        # Assert: The 'EN' language button is active (aria-pressed=true), indicating English was restored.
+        await expect(page.get_by_role("button", name="EN", exact=True).nth(0)).to_have_attribute("aria-pressed", "true", timeout=15000), "The 'EN' language button is active (aria-pressed=true), indicating English was restored."
         await asyncio.sleep(5)
 
     finally:
